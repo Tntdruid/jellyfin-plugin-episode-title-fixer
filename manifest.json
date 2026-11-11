@@ -6,6 +6,7 @@
     "overview": "When TMDb or TheTVDB has no episode title in your language, it returns a placeholder like \"Afsnit 11\". This plugin swaps it for the original title and locks it.",
     "owner": "Tntdruid",
     "category": "Metadata",
+    "imageUrl": "https://raw.githubusercontent.com/Tntdruid/jellyfin-plugin-episode-title-fixer/main/assets/thumb.png",
     "versions": [
       {
         "version": "1.0.0.0",

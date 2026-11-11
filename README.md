@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/logo.png" width="160" alt="Episode Title Fixer logo"></p>
+
 <h1 align="center">Episode Title Fixer for Jellyfin</h1>
 
 🇬🇧 [English](#english) · 🇩🇰 [Dansk](#dansk)
