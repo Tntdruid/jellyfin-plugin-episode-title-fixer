@@ -1,0 +1,20 @@
+[
+  {
+    "guid": "b6f1c2e4-3d8a-4f7b-9e21-5a0c7d4e8f13",
+    "name": "Episode Title Fixer",
+    "description": "Replaces placeholder episode titles like \"Afsnit 11\" or \"Episode 11\" with the original title.",
+    "overview": "When TMDb or TheTVDB has no episode title in your language, it returns a placeholder like \"Afsnit 11\". This plugin swaps it for the original title and locks it.",
+    "owner": "Tntdruid",
+    "category": "Metadata",
+    "versions": [
+      {
+        "version": "1.0.0.0",
+        "changelog": "- First version\n- Fixes placeholder titles automatically when episodes are added or refreshed\n- Scheduled task to fix the whole library\n- Settings page in English and Danish",
+        "targetAbi": "12.2.0.0",
+        "sourceUrl": "https://github.com/Tntdruid/jellyfin-plugin-episode-title-fixer/releases/download/v1.0.0/episode-title-fixer_1.0.0.0.zip",
+        "checksum": "2a8c2f7b2ca8838fd109e604e1fcadfb",
+        "timestamp": "2026-11-11T11:09:31Z"
+      }
+    ]
+  }
+]

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Episode Title Fixer</title>
+</head>
+<body>
+    <div id="EpisodeTitleFixerConfigPage" data-role="page" class="page type-interior pluginConfigurationPage" data-require="emby-input,emby-button,emby-checkbox">
+        <div data-role="content">
+            <div class="content-primary">
+                <form id="EpisodeTitleFixerConfigForm">
+                    <h2>Episode Title Fixer</h2>
+                    <p data-i18n="intro"></p>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="FixAutomatically" name="FixAutomatically" type="checkbox" is="emby-checkbox" />
+                            <span data-i18n="auto"></span>
+                        </label>
+                        <div class="fieldDescription checkboxFieldDescription" data-i18n="autoHelp"></div>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="LockTitle" name="LockTitle" type="checkbox" is="emby-checkbox" />
+                            <span data-i18n="lock"></span>
+                        </label>
+                        <div class="fieldDescription checkboxFieldDescription" data-i18n="lockHelp"></div>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="PlaceholderPattern" data-i18n="pattern"></label>
+                        <input id="PlaceholderPattern" name="PlaceholderPattern" type="text" is="emby-input" />
+                        <div class="fieldDescription" data-i18n="patternHelp"></div>
+                    </div>
+
+                    <div>
+                        <button is="emby-button" type="submit" class="raised button-submit block emby-button">
+                            <span data-i18n="save"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var EpisodeTitleFixerConfig = {
+                pluginUniqueId: 'b6f1c2e4-3d8a-4f7b-9e21-5a0c7d4e8f13'
+            };
+
+            var EpisodeTitleFixerStrings = {
+                en: {
+                    intro: 'When the metadata provider has no title in your language, it often returns a placeholder like "Afsnit 11" or "Episode 11". This plugin replaces it with the original title of the episode.',
+                    auto: 'Fix titles automatically',
+                    autoHelp: 'Fixes an episode right after it is added or its metadata is refreshed. The scheduled task "Fix placeholder episode titles" fixes the whole library.',
+                    lock: 'Lock the title after fixing',
+                    lockHelp: 'Stops a later metadata refresh from bringing the placeholder back.',
+                    pattern: 'Placeholder pattern (regular expression)',
+                    patternHelp: 'Titles matching this pattern are replaced. Not case-sensitive. Leave empty for the default.',
+                    save: 'Save'
+                },
+                da: {
+                    intro: 'Når metadata-udbyderen ikke har en titel på dit sprog, giver den ofte en pladsholder som "Afsnit 11" eller "Episode 11". Dette plugin erstatter den med afsnittets originale titel.',
+                    auto: 'Ret titler automatisk',
+                    autoHelp: 'Retter et afsnit, så snart det bliver tilføjet, eller dets metadata bliver opdateret. Den planlagte opgave "Fix placeholder episode titles" retter hele biblioteket.',
+                    lock: 'Lås titlen efter rettelsen',
+                    lockHelp: 'Forhindrer, at en senere metadata-opdatering henter pladsholderen tilbage.',
+                    pattern: 'Mønster for pladsholdere (regulært udtryk)',
+                    patternHelp: 'Titler, der matcher mønsteret, bliver erstattet. Der skelnes ikke mellem store og små bogstaver. Lad feltet være tomt for at bruge standarden.',
+                    save: 'Gem'
+                }
+            };
+
+            function getStrings() {
+                var lang = (document.documentElement.getAttribute('lang') || navigator.language || 'en')
+                    .toLowerCase().split('-')[0];
+                return EpisodeTitleFixerStrings[lang] || EpisodeTitleFixerStrings.en;
+            }
+
+            function translatePage(page) {
+                var strings = getStrings();
+                page.querySelectorAll('[data-i18n]').forEach(function (el) {
+                    el.textContent = strings[el.getAttribute('data-i18n')] || EpisodeTitleFixerStrings.en[el.getAttribute('data-i18n')];
+                });
+            }
+
+            document.querySelector('#EpisodeTitleFixerConfigPage')
+                .addEventListener('pageshow', function () {
+                    var page = this;
+                    translatePage(page);
+                    Dashboard.showLoadingMsg();
+                    ApiClient.getPluginConfiguration(EpisodeTitleFixerConfig.pluginUniqueId).then(function (config) {
+                        page.querySelector('#FixAutomatically').checked = config.FixAutomatically;
+                        page.querySelector('#LockTitle').checked = config.LockTitle;
+                        page.querySelector('#PlaceholderPattern').value = config.PlaceholderPattern || '';
+                        Dashboard.hideLoadingMsg();
+                    });
+                });
+
+            document.querySelector('#EpisodeTitleFixerConfigForm')
+                .addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    var form = this;
+                    Dashboard.showLoadingMsg();
+                    ApiClient.getPluginConfiguration(EpisodeTitleFixerConfig.pluginUniqueId).then(function (config) {
+                        config.FixAutomatically = form.querySelector('#FixAutomatically').checked;
+                        config.LockTitle = form.querySelector('#LockTitle').checked;
+                        config.PlaceholderPattern = form.querySelector('#PlaceholderPattern').value.trim();
+                        ApiClient.updatePluginConfiguration(EpisodeTitleFixerConfig.pluginUniqueId, config).then(function (result) {
+                            Dashboard.processPluginConfigurationUpdateResult(result);
+                        });
+                    });
+                    return false;
+                });
+        </script>
+    </div>
+</body>
+</html>
