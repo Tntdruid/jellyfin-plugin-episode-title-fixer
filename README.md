@@ -68,13 +68,15 @@ Dette plugin erstatter pladsholderen med den originale titel:
 - Bagefter bliver **kun titelfeltet låst**, så en senere opdatering ikke henter pladsholderen tilbage. Resten af metadataene opdaterer som normalt.
 - Hvis biblioteket gemmer NFO-filer, bliver den nye titel også skrevet i NFO'en.
 
-Afsnit uden originaltitel bliver ikke rørt.
+Afsnit uden originaltitel bliver ikke rørt. Pladsholdere genkendes på mange sprog (Afsnit, Episode, Avsnitt, Jakso, Folge, Aflevering, Épisode, Episodio, …), og mønsteret kan ændres i indstillingerne.
 
 ### Krav
 
 - Jellyfin **12.2** eller nyere
 
 ### Installation
+
+**Fra plugin-repository (anbefalet)**
 
 1. Gå til **Dashboard → Plugins → Repositories** (eller *Katalog → ⚙️*) i Jellyfin, og tilføj:
    ```
@@ -84,7 +86,27 @@ Afsnit uden originaltitel bliver ikke rørt.
 3. Genstart Jellyfin.
 4. Kør **Dashboard → Planlagte opgaver → Fix placeholder episode titles** én gang for at rette det eksisterende bibliotek.
 
-**Manuelt:** Hent den nyeste `.zip` under [Releases](https://github.com/Tntdruid/jellyfin-plugin-episode-title-fixer/releases), pak den ud i en mappe med navnet `Episode Title Fixer_<version>` i Jellyfins `plugins`-mappe, og genstart Jellyfin.
+**Manuelt**
+
+1. Hent den nyeste `.zip` under [Releases](https://github.com/Tntdruid/jellyfin-plugin-episode-title-fixer/releases).
+2. Pak den ud i en mappe med navnet `Episode Title Fixer_<version>` i Jellyfins `plugins`-mappe.
+3. Genstart Jellyfin.
+
+### Indstillinger
+
+| Indstilling | Standard | |
+|---|---|---|
+| Ret titler automatisk | Til | Retter afsnit, når de bliver tilføjet eller opdateret |
+| Lås titlen efter rettelse | Til | Forhindrer, at en senere opdatering henter pladsholderen tilbage |
+| Mønster for pladsholdere | mange sprog | Regulært udtryk, store og små bogstaver er ligegyldige |
+
+### Byg selv
+
+```
+dotnet publish Jellyfin.Plugin.EpisodeTitleFixer -c Release -o out
+```
+
+---
 
 <!-- jellyfin-projects:start -->
 ## More Jellyfin projects / Flere Jellyfin-projekter
@@ -95,3 +117,9 @@ Afsnit uden originaltitel bliver ikke rørt.
 | [Jellyfin Video Stats](https://github.com/Tntdruid/jellyfin-video-stats) | Home Assistant add-on with viewing stats for movies, series and YouTube videos: progress, binges, transcoding, Wrapped | Home Assistant-add-on med seerstatistik for film, serier og YouTube-videoer: fremdrift, binge, transcoding, Wrapped |
 | [Auto Artist Playlists](https://github.com/Tntdruid/jellyfin-plugin-auto-artist-playlists) | Jellyfin plugin that hearts the songs you listen to and adds them to a playlist per artist | Jellyfin-plugin, der giver hjerte til de sange, du hører, og samler dem i en playliste pr. kunstner |
 <!-- jellyfin-projects:end -->
+
+---
+
+## License / Licens
+
+[GPL-3.0](LICENSE)
