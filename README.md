@@ -85,3 +85,13 @@ Afsnit uden originaltitel bliver ikke rørt.
 4. Kør **Dashboard → Planlagte opgaver → Fix placeholder episode titles** én gang for at rette det eksisterende bibliotek.
 
 **Manuelt:** Hent den nyeste `.zip` under [Releases](https://github.com/Tntdruid/jellyfin-plugin-episode-title-fixer/releases), pak den ud i en mappe med navnet `Episode Title Fixer_<version>` i Jellyfins `plugins`-mappe, og genstart Jellyfin.
+
+<!-- jellyfin-projects:start -->
+## More Jellyfin projects / Flere Jellyfin-projekter
+
+| | 🇬🇧 | 🇩🇰 |
+|---|---|---|
+| [Jellyfin Music Stats](https://github.com/Tntdruid/jellyfin-music-stats) | Home Assistant add-on with music listening stats: top lists, genres, moods, Wrapped | Home Assistant-add-on med lyttestatistik for musik: top-lister, genrer, humør, Wrapped |
+| [Jellyfin Video Stats](https://github.com/Tntdruid/jellyfin-video-stats) | Home Assistant add-on with viewing stats for movies, series and YouTube videos: progress, binges, transcoding, Wrapped | Home Assistant-add-on med seerstatistik for film, serier og YouTube-videoer: fremdrift, binge, transcoding, Wrapped |
+| [Auto Artist Playlists](https://github.com/Tntdruid/jellyfin-plugin-auto-artist-playlists) | Jellyfin plugin that hearts the songs you listen to and adds them to a playlist per artist | Jellyfin-plugin, der giver hjerte til de sange, du hører, og samler dem i en playliste pr. kunstner |
+<!-- jellyfin-projects:end -->
